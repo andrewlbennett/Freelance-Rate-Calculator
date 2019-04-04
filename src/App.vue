@@ -5,6 +5,7 @@
         <footer>
             <p>A product made by <a href="https://www.andrewbennett.us" target="_blank">Andrew Bennett</a></p>
             <p>MIT License - Open Source</p>
+            <a href="https://github.com/andrewlbennett/Freelance-Rate-Calculator" target="_blank">Github Repo</a>
         </footer>
     </div>
 </template>
