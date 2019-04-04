@@ -7,6 +7,7 @@ A freelance rate calculator built with Vue.
 
 ## Bugs
 NaN when updating numbers
+
 Infinity appears when billable hours is left blank
 
 ## Project setup
