@@ -3,9 +3,7 @@
         <div class="inputs">
             <h1>Freelance Rate Calculator</h1>
             <p>Fill out all the fields that apply to you and view the estimated hourly rate on the right. If the field doesn't apply to you, put a 0 in it instead.</p>
-            <br>
-            <br>
-            <!-- <h2>Desired Salary</h2> -->
+            <br><br>
             <div class="field">
                 <label for="rent">Desired Salary</label>
                 <input class="input" type="text" v-model="desiredSalary">
@@ -14,9 +12,7 @@
                 <label for="rent">Profit Margin Percentage (Usually 10-20%)</label>
                 <input class="input" type="text" v-model="profitMarginPercentage">
             </div>
-
             <br>
-
             <h2>Yearly Expenses</h2>
             <div class="field">
                 <label for="rent">Rent</label>
@@ -66,9 +62,7 @@
                 <label for="rent">Professional Memberships</label>
                 <input class="input" type="text" v-model="memberships">
             </div>
-
             <br>
-            
             <h2>Non Billable Days</h2>
             <p>Note: These offdays will count as normal 8hr days.</p>
             <div class="field">
@@ -88,9 +82,7 @@
                 <input class="input" type="text" v-model="travelDays">
             </div>
             <!-- <p>{{ offdaysTotal }} days x 8 hours = {{ getNonBillableHours }} nonbillable hours</p> -->
-
             <br>
-            
             <h2>Billable Hours</h2>
             <div class="field">
                 <label for="rent">Avg hours worked per day</label>
@@ -170,10 +162,10 @@ export default {
         normalHours: 8,
         weeksInAYear: 52,
         // Salary
-        desiredSalary: 87000,
+        desiredSalary: 0,
         profitMarginPercentage: 0,
         // Expenses
-        rent: 32000,
+        rent: 0,
         phone: 0,
         internet: 0,
         officeEquipment: 0,
@@ -225,27 +217,21 @@ export default {
             let total = parseInt(this.rent) + parseInt(this.phone) + parseInt(this.internet) + parseInt(this.officeEquipment) + parseInt(this.officeSupplies) + parseInt(this.travelExpenses) + parseInt(this.advertising) + parseInt(this.businessInsurance) + parseInt(this.businessLicenseFees) + parseInt(this.legalFees) + parseInt(this.accountingFees) + parseInt(this.memberships);
             return total;
         },
-
-
         getSalaryExpenses () {
             return parseInt(this.getTotalExpenses) + parseInt(this.desiredSalary);
         },
-        
         getProfitMargin () {
             // 15 / 100 = 0.15
             return (parseInt(this.profitMarginPercentage) / 100);//0.15
         },
-        
         getProfitMarginTotal () {
             // 119,000 * 0.15 = 17,850
             return this.getSalaryExpenses * this.getProfitMargin;
         },
-
         getGrandTotal () {
             // Salary + Expenses + Profit Margin
             return this.getSalaryExpenses + this.getProfitMarginTotal;
         },
-
         getHourlyRate () {
             let grandTotal = this.getGrandTotal;
             let billableHours = this.getTotalBillableHours;
@@ -256,13 +242,13 @@ export default {
 </script>
 
 <style lang="scss">
+// Pulled some styles from Bulma
 h1 {
     margin-bottom: 0.3rem;
 }
 p {
     margin-top: 0;
 }
-// Pulled some styles from Bulma
 main {
     display: flex;
     max-width: 1140px;
