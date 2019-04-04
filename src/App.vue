@@ -1,28 +1,44 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+    <div id="app">
+        <header></header>
+        <Calculator/>
+        <footer>
+            <p>A product made by <a href="https://www.andrewbennett.us" target="_blank">Andrew Bennett</a></p>
+            <p>MIT License - Open Source</p>
+        </footer>
+    </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Calculator from "./components/Calculator.vue";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    Calculator
   }
 };
 </script>
 
 <style lang="scss">
+html, body {
+    margin: 0;
+}
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+    margin: 0;
+}
+header {
+    padding: 3rem;
+}
+footer {
+    margin-top: 150px;
+    padding: 3rem 6rem;
+    background-color: #f7f7f7;
 }
 </style>
