@@ -7,6 +7,7 @@ A freelance rate calculator built with Vue.
 
 ## Inspiration + Credits
 [Jennifer Bourn](https://jenniferbourn.com/calculate-freelance-hourly-rate/)
+
 [Liquid Web](https://www.liquidweb.com/blog/understanding-worth-calculate-minimum-hourly-rate/)
 
 ## Bugs
