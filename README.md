@@ -10,11 +10,6 @@ A freelance rate calculator built with Vue.
 
 [Liquid Web](https://www.liquidweb.com/blog/understanding-worth-calculate-minimum-hourly-rate/)
 
-## Bugs
-NaN when updating numbers
-
-Infinity appears when billable hours is left blank
-
 ## Project setup
 ```
 npm install

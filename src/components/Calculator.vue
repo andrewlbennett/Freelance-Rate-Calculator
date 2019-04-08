@@ -92,53 +92,35 @@
             <!-- <p>{{(getYearlyBillableHours)}} billable hrs - {{ getNonBillableHours }} nonbillable hrs = {{ getTotalBillableHours }} total billable hrs</p> -->
         </div>
         <div class="outputs">
-            <!-- <h2>Outputs</h2> -->
-            <!-- Billable Days -->
-            <!-- <div class="output">
-                <h3>Yearly Billable Days</h3>
-                <h3>{{ desiredSalary }}</h3>
-            </div> -->
-            <!-- /Billable Days -->
-            <!-- Weekly Billable Hours -->
-            <!-- <div class="output">
-                <h3>Weekly Billable Hours</h3>
-                <h3>{{ desiredSalary }}</h3>
-            </div> -->
-            <!-- /Weekly Billable Hours -->
-            <!-- Yearly Billable Hours -->
-            <!-- <div class="output">
-                <h3>Yearly Billable Hours</h3>
-                <h3>{{ desiredSalary }}</h3>
-            </div> -->
-            <!-- /Yearly Billable Hours -->
             <!-- Salary -->
             <div class="output">
                 <h3>Desired Salary</h3>
-                <h3>{{ desiredSalary }}</h3>
+                <h3 v-if="desiredSalary">{{ desiredSalary | addCommas }}</h3>
+                <h3 v-else>0</h3>
             </div>
             <!-- /Salary -->
             <!-- Expenses -->
             <div class="output">
                 <h3>Expenses</h3>
-                <h3>{{ getTotalExpenses }}</h3>
+                <h3>{{ getTotalExpenses | addCommas }}</h3>
             </div>
             <!-- /Expenses -->
             <!-- Total -->
             <div class="output">
                 <h3>Salary + Expenses</h3>
-                <h3>{{ getSalaryExpenses }}</h3>
+                <h3>{{ getSalaryExpenses | addCommas }}</h3>
             </div>
             <!--  Total -->
             <!-- Profit Margin Total -->
             <div class="output">
                 <h3>Profit Margin of {{profitMarginPercentage}}%</h3>
-                <h3>{{ getProfitMarginTotal }}</h3>
+                <h3>{{ getProfitMarginTotal | addCommas }}</h3>
             </div>
             <!-- /Profit Margin Total -->
             <!-- Grand Total -->
             <div class="output">
                 <h3>Grand Total</h3>
-                <h3>{{ getGrandTotal }}</h3>
+                <h3>{{ getGrandTotal | addCommas }}</h3>
             </div>
             <!-- /Grand Total -->
             <br>
@@ -155,48 +137,47 @@
 
 <script>
 export default {
-  name: "Calculator",
-  data() {
-    return {
-        // Normal Variables
-        normalHours: 8,
-        weeksInAYear: 52,
-        // Salary
-        desiredSalary: 0,
-        profitMarginPercentage: 0,
-        // Expenses
-        rent: 0,
-        phone: 0,
-        internet: 0,
-        officeEquipment: 0,
-        officeSupplies: 0,
-        travelExpenses: 0,
-        advertising: 0,
-        businessInsurance: 0,
-        businessLicenseFees: 0,
-        legalFees: 0,
-        accountingFees: 0,
-        memberships: 0,
-        // Billable Days
-        holidays: 0,
-        sickDays: 0,
-        vacationDays: 0,
-        travelDays: 0,
-        offdays: 0,
-        nonBillableHours: 0,
-        // Billable Hours
-        billableHoursPerDay: 0,
-        billableHoursPerWeek: 0,
-        totalBillableHours: 0,
-        // Outputs
-        expensesTotal: 0,
-        total: 0,
-        grandTotal: 0,
-        profitMarginTotal: 0,
-        hourlyRate: 0
-    } 
-  },
-  computed: {
+    name: "Calculator",
+    data() {
+        return {
+            normalHours: 8,
+            weeksInAYear: 52,
+            // Salary
+            desiredSalary: null,
+            profitMarginPercentage: 0,
+            // Expenses
+            rent: 0,
+            phone: 0,
+            internet: 0,
+            officeEquipment: 0,
+            officeSupplies: 0,
+            travelExpenses: 0,
+            advertising: 0,
+            businessInsurance: 0,
+            businessLicenseFees: 0,
+            legalFees: 0,
+            accountingFees: 0,
+            memberships: 0,
+            // Billable Days
+            holidays: 0,
+            sickDays: 0,
+            vacationDays: 0,
+            travelDays: 0,
+            offdays: 0,
+            nonBillableHours: 0,
+            // Billable Hours
+            billableHoursPerDay: 0,
+            billableHoursPerWeek: 0,
+            totalBillableHours: 0,
+            // Outputs
+            expensesTotal: 0,
+            total: 0,
+            grandTotal: 0,
+            profitMarginTotal: 0,
+            hourlyRate: 0
+        } 
+    },
+    computed: {
         getOffDaysTotal () {
             let total = parseInt(this.holidays) + parseInt(this.sickDays) + parseInt(this.vacationDays) + parseInt(this.travelDays);
             return this.offdays = total;
@@ -214,30 +195,41 @@ export default {
             return (this.getYearlyBillableHours - this.getNonBillableHours);
         },
         getTotalExpenses () {
-            let total = parseInt(this.rent) + parseInt(this.phone) + parseInt(this.internet) + parseInt(this.officeEquipment) + parseInt(this.officeSupplies) + parseInt(this.travelExpenses) + parseInt(this.advertising) + parseInt(this.businessInsurance) + parseInt(this.businessLicenseFees) + parseInt(this.legalFees) + parseInt(this.accountingFees) + parseInt(this.memberships);
+            let total = parseInt(this.rent || 0) + parseInt(this.phone || 0) + parseInt(this.internet || 0) + parseInt(this.officeEquipment || 0) + parseInt(this.officeSupplies || 0) + parseInt(this.travelExpenses || 0) + parseInt(this.advertising || 0) + parseInt(this.businessInsurance || 0) + parseInt(this.businessLicenseFees || 0) + parseInt(this.legalFees || 0) + parseInt(this.accountingFees || 0) + parseInt(this.memberships || 0);
             return total;
         },
         getSalaryExpenses () {
-            return parseInt(this.getTotalExpenses) + parseInt(this.desiredSalary);
+            // Salary + Expenses
+            return parseInt(this.getTotalExpenses || 0) + parseInt(this.desiredSalary || 0);
         },
         getProfitMargin () {
             // 15 / 100 = 0.15
-            return (parseInt(this.profitMarginPercentage) / 100);//0.15
+            return (parseInt(this.profitMarginPercentage) / 100);
         },
         getProfitMarginTotal () {
             // 119,000 * 0.15 = 17,850
-            return this.getSalaryExpenses * this.getProfitMargin;
+            return (this.getSalaryExpenses || 0) * (this.getProfitMargin || 0);
         },
         getGrandTotal () {
             // Salary + Expenses + Profit Margin
-            return this.getSalaryExpenses + this.getProfitMarginTotal;
+            return (this.getSalaryExpenses || 0) + (this.getProfitMarginTotal || 0);
         },
         getHourlyRate () {
-            let grandTotal = this.getGrandTotal;
-            let billableHours = this.getTotalBillableHours;
-            return (grandTotal / billableHours).toFixed(2);
+            if(this.getGrandTotal != 0 && this.getTotalBillableHours != 0) {
+                let grandTotal = this.getGrandTotal;
+                let billableHours = this.getTotalBillableHours;
+                return (grandTotal / billableHours).toFixed(2);
+            } else {
+                return 0;
+            }
         }
-  }
+    },
+    filters: {
+        addCommas(payload) {
+            let parsedPayload = parseInt(payload);
+            return parsedPayload.toLocaleString('en');
+        }
+    }
 };
 </script>
 
